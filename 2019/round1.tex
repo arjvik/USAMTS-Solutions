@@ -1,0 +1,551 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[pdftex]{graphicx}
+\usepackage[inline]{asymptote}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\pagestyle{fancy}
+\usepackage[nottoc]{tocbibind}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage{csquotes}
+\usepackage{titlesec}
+\usepackage{float}
+\usepackage{wasysym}
+\usepackage{enumitem}
+\include{usamts}
+\renewcommand{\baselinestretch}{1.44}
+\setlength{\parindent}{0cm}
+
+\realname{Arjun Vikram}
+\username{arjvik}
+\usamtsid{36783}
+\usamtsyear{31}
+\usamtsround{1}
+
+\begin{document}
+
+%% Problem 1 Solution
+\begin{solution}{1}
+    \begin{asy}
+        unitsize(1cm);
+        for(int i = 0; i < 10; ++i) {
+            for(int j = 0; j < 10; ++j) {
+                draw((i - 0.5, j - 0.5)--(i + 0.5, j - 0.5)--(i + 0.5, j + 0.5)--(i - 0.5, j + 0.5)--(i - 0.5, j - 0.5), gray(0.5));
+            }
+        }
+        
+        draw((0 - 0.5, 2 - 0.5)--(1 - 0.5, 2 - 0.5), gray(0) + 3);
+        draw((0 - 0.5, 6 - 0.5)--(0.5, 5.5), black+3);
+        draw((-0.5, 6.5)--(0.5, 6.5)--(0.5, 7.5), black+3);
+        draw((-0.5, 8.5)--(0.5, 8.5), black+3);
+        draw((1.5, -0.5)--(1.5, 1.5), black+3);
+        draw((1.5, 5.5)--(1.5, 6.5)--(2.5, 6.5)--(2.5, 7.5)--(1.5, 7.5), black+3);
+        draw((1.5, 9.5)--(1.5, 8.5), black+3);
+        draw((2.5, -0.5)--(2.5, 0.5)--(3.5, 0.5)--(3.5, 1.5), black+3);
+        draw((4.5, 1.5)--(5.5, 1.5)--(5.5, 2.5), black+3);
+        draw((4.5, 6.5)--(5.5, 6.5), black+3);
+        draw((5.5, 8.5)--(6.5, 8.5)--(6.5, 7.5), black+3);
+        draw((6.5, -0.5)--(6.5, 0.5), black+3);
+        draw((6.5, 1.5)--(7.5, 1.5), black+3);
+        draw((8.5, 5.5)--(8.5, 4.5), black+3);
+        
+        // Set up utilities for solution
+        
+        pen c;
+        c = black+1;
+        
+        void horizontal(int x, int y) {
+            draw((x, y)--(x+1,y), c);
+        }
+        void vertical(int x, int y) {
+            draw((x, y)--(x,y+1), c);
+        }
+        void star(int x, int y) {
+            label("$\large\bigstar$", (x, y), 0*dir(0), c);
+        }
+        
+        // Solution starts here
+        
+        horizontal(0, 9);
+        vertical(0, 7);
+        vertical(2, 8);
+        horizontal(1, 7);
+        star(1, 8);
+        horizontal(0, 6);
+        vertical(2, 5);
+        star(1, 5);
+        star(2, 4);
+        vertical(0, 4);
+        vertical(1, 3);
+        vertical(2, 2);
+        vertical(0, 2);
+        star(1, 2);
+        horizontal(0, 0);
+        horizontal(0, 1);
+        star(1,2);
+        vertical(2, 0);
+        vertical(3, 1);
+        star(3, 3);
+        vertical(3, 4);
+        star(3, 6);
+        vertical(3, 7);
+        star(3, 9);
+        horizontal(3, 0);
+        horizontal(5, 0);
+        horizontal(4, 1);
+        star(6, 1);
+        star(4, 2);
+        vertical(5, 2);
+        star(5, 4);
+        vertical(4, 3);
+        star(4, 5);
+        horizontal(6, 2);
+        horizontal(7, 3);
+        horizontal(6, 4);
+        horizontal(5, 5);
+        horizontal(4, 6);
+        star(6, 3);
+        star(4, 7);
+        star(6, 6);
+        vertical(5, 7);
+        vertical(6, 7);
+        vertical(4, 8);
+        star(5, 9);
+        horizontal(6, 9);
+        horizontal(8, 9);
+        horizontal(7, 8);
+        star(9, 8);
+        star(7, 7);
+        horizontal(8, 7);
+        horizontal(7, 6);
+        star(9, 6);
+        vertical(9, 4);
+        star(9, 3);
+        horizontal(7, 5);
+        star(8, 4);
+        vertical(7, 0);
+        vertical(8, 0);
+        vertical(9, 1);
+        star(8, 2);
+        star(9, 0);
+    \end{asy}
+\end{solution}
+
+%% Problem 2 S on
+\begin{solution}{2}
+
+    We are given $x,y,z\in\mathbb R$, $x,y,z > 1$, and
+    \begin{equation*}
+        x^y=y^z=z^x.
+    \end{equation*}
+    
+    WLOG, let us assume that $x \le y \le z$.
+    
+    Because $\ln x$ is monotonically increasing, $\ln x \le \ln y \le \ln z$.
+    
+    We can take the natural log of both sides of the given equation to get
+    \begin{align*}
+        \ln x^y &= \ln y^z = \ln z^x \\
+        y\ln x &= z\ln y = x\ln z. \tag{1}
+    \end{align*}
+    
+    Note that we were able to do this because $x, y, z > 1$.
+    
+    We can then use \textbf{Lemma 1} (proved below) with the following substitutions:
+    \begin{equation*}
+        a = y \qquad
+        b = z \qquad
+        c = \ln x \qquad
+        d = \ln y.
+    \end{equation*}
+    
+    By Lemma 1,
+    \begin{equation*}
+        y\ln x + z\ln y \ge y\ln y + z\ln x. \tag{2}
+    \end{equation*}
+    
+    We now try to use AM-GM on the right hand side of the equation.
+    \begin{align*}
+        \frac{y\ln y + z\ln x}2
+        &\ge \sqrt{yz\cdot\ln x\cdot\ln y} \\
+        &= \sqrt{y\ln x\cdot z\ln y} \\
+        &= \sqrt{y\ln x\cdot y\ln x} \qquad\small\text{(using equation 1)} \\
+        &= \sqrt{\left(y\ln x\right)^2} \\
+        &= y\ln x.
+    \end{align*}
+    
+    Then
+    \begin{align*}
+        y\ln y + z\ln x
+        &\ge 2y\ln x \\
+        &= y\ln x + y\ln x \\
+        &= y\ln x + z\ln y. \tag{3}
+    \end{align*}
+    
+    Combining inequalities $2$ and $3$
+    \begin{equation*}
+        y\ln x + z\ln y \ge y\ln y + z\ln x \ge y\ln x + z\ln y. \tag{4}
+    \end{equation*}
+    
+    Notice that the left and right sides of inequality $(4)$ are the same expression.
+    Therefore, since the expression in the middle of the inequality is sandwiched between the left and right sides,
+    \begin{equation*}
+        y\ln x + z\ln y = y\ln y + z\ln x.
+    \end{equation*}
+
+    By \textbf{Lemma 1 Corollary} (proved below), either $y=z$ or $\ln x = \ln y \implies x=y$. We can prove $x=y=z$ pretty easily in both cases as follows.
+
+    \textbf{Case 1:} $y=z$
+    \begin{align*}
+        y^z &= z^x \tag{\small{from given}} \\
+        z^z &= z^x \\
+        \ln{z^z} &= \ln{z^x} \\
+        z\ln z &= x\ln z\\
+        z &= x,
+    \end{align*}
+    
+    so therefore,
+    \begin{equation*}
+        x=y=z. \tag*{\qed}
+    \end{equation*}
+
+    \pagebreak
+    \textbf{Case 2:} $x=y$
+
+    This case is quite similar to Case 1.
+    
+    \begin{align*}
+        x^y &= y^z \tag{\small{from given}} \\
+        y^y &= y^z \\
+        \ln{y^y} &= \ln{y^z} \\
+        y\ln y &= z\ln y \\
+        y &= z,
+    \end{align*}
+    
+    so therefore,
+    \begin{equation*}
+        x=y=z. \tag*{\qed}
+    \end{equation*}
+    
+    \subsection*{Lemma 1}
+    This lemma is the two-variable case of the Rearrangement Inequality.
+    
+    Let
+    \begin{align*}
+        a &\le b, \\
+        c &\le d.
+    \end{align*}
+    
+    Then,
+    \begin{align*}
+        b-a &\ge 0 \\
+        d-c &\ge 0,
+    \end{align*}
+    
+    so
+    \begin{equation*}
+        (b-a)(d-c) \ge 0. \tag{A}
+    \end{equation*}
+    
+    Expanding this,
+    \begin{equation*}
+        bd+ac - ad - bc \ge 0.
+    \end{equation*}
+    
+    If we move two of the terms to the right hand side,
+    \begin{equation*}
+        ac + bd \ge ad + bc. \tag*{\qed}
+    \end{equation*}
+    
+    \subsubsection*{Lemma 1 Corollary}
+    (Equality case)
+    
+    Now assume
+    \begin{equation*}
+        ac+bd=ad+bc.
+    \end{equation*}
+    
+    We can see that this equality can only be reached if either
+    \begin{equation*}
+        b-a = 0
+        \text{ or }
+        d-c = 0,
+        \tag{\small{see inequality A}}
+    \end{equation*}
+    
+    so either $a=b$ or $c=d$. Therefore, we have proved that for $a\le b,\ c\le d$,
+    \begin{equation*}
+        ac+bd=ad+bc \implies a=b \text{ or } c=d. \tag*{\qed}
+    \end{equation*}
+    
+\end{solution}
+
+\begin{solution}{3}
+
+    \begin{asydef}
+        unitsize(5cm);
+        
+        pair p = (1,1);
+        pair l = (0,1);
+        pair u = (0,0);
+        pair m = (1,0);
+        
+        pen text = black+1;
+        pen line = black+1;
+        pen thin = black+.5;
+        pen dash = line+dashed;
+        pen point= black+3;
+        
+        draw(p, point);
+        draw(l, point);
+        draw(u, point);
+        draw(m, point);
+        
+        draw(p--l, line);
+        draw(l--u, line);
+        draw(u--m, line);
+        draw(m--p, line);
+        
+        label("$P$", p, 1*dir(45), text);
+        label("$L$", l, 1*dir(135), text);
+        label("$U$", u, 1*dir(225), text);
+        label("$M$", m, 1*dir(315), text);
+        
+        pair w = (.5, .5);
+        /*draw(w, point);
+        label("$\omega$", w, 1*dir(135), text);*/
+        draw(circle(w, .5), line);
+    \end{asydef}
+    
+    \begin{figure}[H]
+        \centering
+        \begin{asy}
+            draw((0.5,-0.1)--(0.5,1.1), thin);
+            draw((-0.1,0.5)--(1.1,0.5), thin);
+            label("I", (0.7, 0.7), text);
+            label("II", (0.3, 0.7), text);
+            label("III", (0.3, 0.3), text);
+            label("IV", (0.7, 0.3), text);
+            draw(w, point);
+            label("$\omega$", w, 1*dir(135), text);
+        \end{asy}
+        \caption{Separating square $PLUM$ into quadrants}
+    \end{figure}
+    
+    
+    
+    We begin by looking at the possible positions of the point $E$.
+    Point $E$ could be in any of the 4 quadrants (I, II, III, IV).
+    We can see that the case where point $E$ is in quadrant IV is
+    just a reflection of the case where point $E$ is in quadrant II, so we can ignore that case.
+    We can also see that if point $E$ is in quadrant III, point $I$ must be in either quadrant I, II, or IV (see Figure 2 below),
+    so we can switch point $E$ and point $I$ and have point $E$ in either quadrant I, II, or IV.
+    
+    \begin{figure}[H]
+        \centering
+        \begin{asy}
+            draw((0.5,-0.1)--(0.5,1.1), thin);
+            draw((-0.1,0.5)--(1.1,0.5), thin);
+            label("I", (0.7, 0.7), line);
+            label("II", (0.3, 0.7), line);
+            label("III", (0.3, 0.3), line);
+            label("IV", (0.7, 0.3), line);
+            
+            pair e1 = (0.078, 0.2326);
+            pair i1 = (0.322, 0.9674);
+            draw(e1, point);
+            draw(i1, point);
+            label("$E_1$", e1, 1*dir(0), text);
+            label("$I_1$", i1, 1*dir(315), text);
+            draw(u--e1--i1, dash);
+            
+            pair e2 = (0.1464, 0.1464);
+            pair i2 = (0.8536, 0.8536);
+            draw(e2, point);
+            draw(i2, point);
+            label("$E_2$", e2, 1*dir(0), text);
+            label("$I_2$", i2, 1*dir(270), text);
+            draw(u--e2--i2, dash);
+            
+            pair e3 = (0.2326, 0.078);
+            pair i3 = (0.9674, 0.322);
+            draw(e3, point);
+            draw(i3, point);
+            label("$E_3$", e3, 3*dir(350), text);
+            label("$I_3$", i3, 1*dir(135), text);
+            draw(u--e3--i3, dash);
+        \end{asy}
+        \caption{Cases where pont $E$ is in quadrant III}
+    \end{figure}
+    
+    Therefore, we only have to consider the cases where point $E$ is in quadrants I or II, as the other two cases can be reduced to these cases. We will now place square $PLUM$ onto the coordinate plane, where $U = (0, 0)$ and $P=(1, 1)$. 
+    
+    \begin{asydef}
+        label("$(1,1)$", p, 4*dir(18), text);
+        label("$(0,1)$", l, 4*dir(162), text);
+        label("$(0,0)$", u, 4*dir(198), text);
+        label("$(1,0)$", m, 4.2*dir(342), text);
+        
+    \end{asydef}
+    
+    \begin{figure}[H]
+        \centering
+        \begin{asy}
+            draw(u--(0,1.2), line, EndArrow);
+            draw(u--(1.4,0), line, EndArrow);
+            draw(w, point);
+            label("$\omega (\frac12, \frac12)$", w, 1*dir(0), text);
+        \end{asy}
+        \caption{Placing square $PLUM$ onto the coordinate plane}
+    \end{figure}
+    
+    Let point $E = (a, b)$. We can let $a$ be a parameter, and define $b$ in terms of $a$. Because we limited point $E$ to being in quadrant I or II, there is a unique value $b$ for each value $a$.
+    
+    The equation of the circle $\omega$ is
+    \begin{equation*}
+        y = \frac12 \pm \sqrt{\frac14 - \left(x-\frac12\right)^2}.
+    \end{equation*}
+    
+    Because we know that point $E$ is in quadrants I or II, we want to use the upper portion, so
+    \begin{equation*}
+        b = \frac12 + \sqrt{\frac14 - \left(a-\frac12\right)^2}. \tag{1}
+    \end{equation*}
+    
+    Let point $I = (c, d)$. To find point $I$, we draw line $\overline{UE}$ and find where it intersects with circle $\omega$.
+    
+    \begin{figure}[H]
+        \centering
+        \begin{asy}
+            pair e = (0.322, 0.964);
+            draw(e, point);
+            label("$E (a,b)$", e, 1*dir(315), text);
+            
+            pair i = (0.078, 0.2326);
+            draw(i, point);
+            label("$I (c,d)$", i, 1*dir(0), text);
+            
+            draw(u--i--e, line);
+        \end{asy}
+        \caption{Placing square $PLUM$ onto the coordinate plane}
+    \end{figure}
+    
+    The equation of this line is
+    \begin{equation*}
+        y = \frac{bx}a.
+    \end{equation*}
+    
+    Because point $I$ is in the lower half of the circle, we use the lower portion of our equation for circle $\omega$. Therefore, we can find the coordinates of point $I$ with the equation
+    \begin{equation*}
+        d = \frac{bc}a = \frac12 - \sqrt{\frac14 - \left(c-\frac12\right)^2}. \tag{2}
+    \end{equation*}
+    
+    We can then solve this equation for $b$ and $c$ in terms of $a$ as follows:
+    \begin{align*}
+        &\frac{bc}a = \frac12 - \sqrt{\frac14 - \left(c-\frac12\right)^2} \\
+        &\frac12 - \frac{bc}a = \sqrt{\frac14 - \left(c-\frac12\right)^2} \\
+        &\left(\frac12 - \frac{bc}a\right)^2 = \frac14 - \left(c-\frac12\right)^2 \\
+        &\frac14 + \frac{b^2c^2}{a^2} -\frac{bc}a = \frac14 - c^2 - \frac14 + c \\
+        &\frac{b^2}{a^2}c^2 - \frac ba a + \frac14 = -c^2 + c \\
+        &\left(\frac{b^2}{a^2} +1\right)c^2 - \left(\frac ba +1\right)c + \frac14 = 0. \\
+    \end{align*}
+    
+    Using the quadratic formula, we see that we have solutions at
+    \begin{align*}
+        c
+        &= \dfrac{\left(\dfrac ba +1\right)\pm\sqrt{
+            \left(\dfrac ba +1\right)^2 - \left(\dfrac{b^2}{a^2} +1\right)
+        }}{2\left(\dfrac{b^2}{a^2} +1\right)} \\
+        &= \dfrac{\left(\dfrac ba +1\right)\pm\sqrt{
+            \dfrac{b^2}{a^2} + 1 + \frac{2b}a - \dfrac{b^2}{a^2} - 1
+        }}{2\left(\dfrac{b^2}{a^2} +1\right)} \\
+        &= \dfrac{\left(\dfrac ba +1\right)\pm\sqrt{
+            \dfrac{2b}a
+        }}{2\left(\dfrac{b^2}{a^2} +1\right)}
+    \end{align*}
+    
+    Clearly, we have an extraneous solution, as there is only one possible point $I$ for any given point $E$. If we plug in equation $(1)$ into the larger solution, after some heavy simplification (using the online math tool Wolfram Alpha) we get $c=a$. Therefore, we only need to consider the smaller solution, so
+    \begin{equation*}
+        c = \dfrac{
+            \dfrac ba + 1 - \sqrt{\dfrac{2b}a}
+        }{
+            2\left(\dfrac{b^2}{a^2}+1\right)
+        }. \tag{3}
+    \end{equation*}
+    
+    Since we now have solved for $b$, $c$, and $d$ in terms of $a$, we are ready to derive an expression for the area
+    of $\triangle PIE$.
+    
+    The coordinates of the vertices of the triangle are (in counter-clockwise order) $P=(1,1)$, $E=(a,b)$, and $I=(c,d)$.
+    Using the Shoelace Theorem, the area of this triangle is:
+    \begin{align*}
+        \left[\triangle PIE\right]
+        &= \left|\frac{ 1 \cdot b + a \cdot d + c \cdot 1 - 1 \cdot a - b \cdot c - d \cdot 1 }2\right| \\
+        &= \left|\frac{ b + c - a - d + ad - bc }2\right|.
+    \end{align*}
+    
+    Note that by rearranging equation $(2)$, $ad=bc$, so this becomes
+    \begin{equation*}
+        \left[\triangle PIE\right] = \left|\frac{b + c - a - d}2\right|. \tag{4}
+    \end{equation*}
+    
+    Now, let us plug in our values for $b$, $c$, and $d$ into equation $(4)$, using equations $(1)$, $(3)$, and $(2)$ respectively.
+    
+    \begin{align*}
+        \left[\triangle PIE\right]
+        &= \frac12\big| b + c - d - a\big| \\
+        &=\frac{1}{2}\left|\frac{1}{2}+\sqrt{\frac{1}{4}-\left(a-\frac{1}{2}\right)^{2}}+\frac{\frac{\frac{1}{2}+\sqrt{\frac{1}{4}-\left(a-\frac{1}{2}\right)^{2}}}{a}+1-\sqrt{\frac{2\left(\frac{1}{2}+\sqrt{\frac{1}{4}-\left(a-\frac{1}{2}\right)^{2}}\right)}{a}}}{2\left(\frac{\left(\frac{1}{2}+\sqrt{\frac{1}{4}-\left(a-\frac{1}{2}\right)^{2}}\right)^{2}}{a^{2}}+1\right)}\right.\\&\qquad\qquad\left.-
+        \frac{1}{a}\cdot\frac{\frac{\frac{1}{2}+\sqrt{\frac{1}{4}-\left(a-\frac{1}{2}\right)^{2}}}{a}+1-\sqrt{\frac{2\left(\frac{1}{2}+\sqrt{\frac{1}{4}-\left(a-\frac{1}{2}\right)^{2}}\right)}{a}}}{2\left(\frac{\left(\frac{1}{2}+\sqrt{\frac{1}{4}-\left(a-\frac{1}{2}\right)^{2}}\right)^{2}}{a^{2}}+1\right)}\cdot\left(\frac{1}{2}+\sqrt{\frac{1}{4}-\left(a-\frac{1}{2}\right)^{2}}\right)-a\right|
+    \end{align*}
+    
+    We now need to find the maximum of this expression. We do so by taking its derivative and setting it equal to 0.
+    \begin{equation*}
+        \frac{\mathrm d}{\mathrm da} [\triangle PIE] = 0
+    \end{equation*}
+    
+    Unfortunately, this expression is too complex to differentiate by hand. We can make use of Wolfram Alpha to take it's derivative, and then set it equal to 0. This gives us a solution of $a = 0.25$. If we plug this solution back into the equation we have for $[\triangle PIE]$ (again using Wolfram Alpha to simplify), we get that
+    \begin{equation*}
+        \boxed{\max\ [\triangle PIE] = \frac14.} \tag*{\qed}
+    \end{equation*}
+
+\end{solution}
+
+\begin{solution}{4}
+    \textbf{NOTE: This is not intended to be a full solution. I was unable to figure out how to prove my conjectures. However, I would like to attempt to earn a few points from what I have discovered, if at all possible.}
+    
+    \newtheorem{conj}{Conjecture}
+    \begin{conj}
+        The number of people stuck with mangoes which can not be shared or eaten in a group of
+        $K$ people with $N$ mangoes initially is the number of 1s in the binary representation of $N$,
+        as long as $K$ is not smaller than this number.
+    \end{conj}
+    
+    I unfortunately do not know how to prove this conjecture fully. What I have discovered is:
+    
+    \setlist{nolistsep}
+    \begin{itemize}
+        \itemsep 0em
+        \item Someone is only stuck with mangoes that can't be shared or eaten if they have exactly one mango.
+        \item The conjecture is true for various values of $N$ and $K$ when $1\le N\le 7$.
+        \item I believe the final proof will be via induction on the different values of $K$ or $N$.
+    \end{itemize}
+    
+    \paragraph{}
+    This conjecture was discovered through the observation that if "sharing" was not allowed, then the number of people
+    with a single mango at the end which can not be eaten is exactly the number of 1s when $N$ is written in binary.
+    The proof is trivial: consider a person performing the "eating" operation as many times as possible. If they
+    began with $N$ mangoes, they will pass $\left\lfloor\frac N2\right\rfloor$ mangoes to the next person. They will remain
+    with either 0 or 1 mangoes if $N$ is even or odd, respectively. if $N$ was odd, the right-most digit in the binary representation of $N$ was a 1, and otherwise it was a 0. The number of mangoes received by the next person is then
+    $N$ with its last digit removed. Thus, for every time someone is left with a mango, a $1$ is removed from the binary
+    representation of the number of mangoes at the current person, until the next person gets no mangoes, so the number
+    of people with mangoes is the number of $1$s in the binary representation of the number of mangoes at the beginning.
+    \newline
+    Using \textbf{Conjecture 1} ($K=100$, $N=2019$), there will be exactly 8 people left with mangoes.
+    
+\end{solution}
+
+\begin{solution}{5}
+    This proof is left as an exercise to the reader. \smiley
+\end{solution}
+
+\end{document}
